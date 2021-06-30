@@ -1,4 +1,5 @@
 module Mastermind
+  color_choices = %w(r g b y c p)
   class Game
     def initialize
       beginning_prompt
@@ -16,7 +17,11 @@ module Mastermind
   end
 
   class ComputerPlayer
-
+    def get_computer_secret_code
+      puts "computer's secret code:"
+      computer_secret_code = color_choices.sample(4)
+      p computer_secret_code
+    end
   end
 end
 
