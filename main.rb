@@ -1,5 +1,6 @@
 module Mastermind
-  color_choices = %w(r g b y c p)
+  COLOR_CHOICES = %w(r g b y c p)
+
   class Game
     def initialize
       beginning_prompt
