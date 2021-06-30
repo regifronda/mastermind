@@ -4,6 +4,9 @@ module Mastermind
   class Game
     def initialize
       beginning_prompt
+
+      @computer_player = ComputerPlayer.new([])
+
       codebreaker_mode
     end
 
@@ -13,15 +16,21 @@ module Mastermind
     end
 
     def codebreaker_mode
-      puts "You're a codebreaker!"
+      puts "You're the codebreaker!"
+      secret_code = @computer_player.get_computer_secret_code
+     
     end
   end
 
   class ComputerPlayer
+    attr_accessor :computer_secret_code
+
+    def initialize(computer_secret_code)
+      @computer_secret_code = computer_secret_code
+    end
+
     def get_computer_secret_code
-      puts "computer's secret code:"
-      computer_secret_code = color_choices.sample(4)
-      p computer_secret_code
+      @computer_secret_code = 4.times.map { |color| COLOR_CHOICES.sample }
     end
   end
 end
