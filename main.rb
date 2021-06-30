@@ -6,7 +6,8 @@ module Mastermind
     end
 
     def beginning_prompt
-      puts "this first shows up when you play the game!"
+      puts "Codemaker creates a four-color code from the six colors: \nred, green, blue, yellow, cyan, and purple."
+      puts "The colors will be shortened to \'r,\' \'g,\' \'b,\' \'y,\' \'c,\' \'p,\' respectively."
     end
 
     def codebreaker_mode
@@ -14,6 +15,9 @@ module Mastermind
     end
   end
 
+  class ComputerPlayer
+
+  end
 end
 
 include Mastermind
