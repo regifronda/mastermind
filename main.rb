@@ -3,11 +3,11 @@ module Mastermind
 
   class Game
     def initialize
-      @computer_player = ComputerPlayer.new([])
-      @human_player = HumanPlayer.new([])
+      @computer_player = ComputerPlayer.new([], [])
+      @human_player = HumanPlayer.new([], [])
 
       mode_choice = beginning_prompt
-      
+
       if mode_choice == "1"
         codebreaker_mode
       elsif mode_choice == "2"
@@ -72,16 +72,18 @@ module Mastermind
     end
 
     def codemaker_mode
-      puts "codemaker_mode entered!"
+      puts "You're the codemaker!"
+      secret_code = @human_player.get_human_secret_code
     end
   end
  
 
   class ComputerPlayer
-    attr_accessor :computer_secret_code
+    attr_accessor :computer_secret_code, :computer_guess
 
-    def initialize(computer_secret_code)
+    def initialize(computer_secret_code, computer_guess)
       @computer_secret_code = computer_secret_code
+      @computer_guess = computer_guess
     end
 
     def get_computer_secret_code
@@ -90,10 +92,11 @@ module Mastermind
   end
 
   class HumanPlayer
-    attr_accessor :human_guess
+    attr_accessor :human_guess, :human_secret_code
 
-    def initialize(human_guess)
+    def initialize(human_guess, human_secret_code)
       @human_guess = human_guess
+      @human_secret_code = human_secret_code
     end
   
     def get_human_guess
@@ -116,6 +119,15 @@ module Mastermind
       else
         puts "Your guess is in the improper format!"
       end
+    end
+
+    def get_human_secret_code
+      colors = ask_for_human_secret_code
+    end
+
+    def ask_for_human_secret_code
+      puts "Enter your secret code in the following format: rybb"
+      gets.strip.downcase.split(//)
     end
   end
 
