@@ -20,10 +20,19 @@ module Mastermind
       puts "You're the codebreaker!"
       secret_code = @computer_player.get_computer_secret_code
       guess = @human_player.get_human_guess
-      end
+      p secret_code
+      p guess
+      #get_feedback(secret_code, guess)
+    end
+
+    def get_feedback(secret_code, guess)
+      result = Array.new(4, '')
+      secret_code.zip(guess).each{|i| result.unshift('black').pop if i.inject(:eql?)}
+      guess.uniq.each{|i| result.unshift('white').pop if secret_code.include?(i) && result[-1] == ''}
+      result
     end
   end
-
+  
   class ComputerPlayer
     attr_accessor :computer_secret_code
 
@@ -45,10 +54,10 @@ module Mastermind
   
     def get_human_guess
       colors = ask_for_human_guess
-      
       if validate_human_guess(colors)
-        puts "if statement on validate_human_guess"
+        puts "statement on validate_human_guess"
       end
+      colors
     end
 
     def ask_for_human_guess
@@ -59,14 +68,13 @@ module Mastermind
     def validate_human_guess(colors)
       if colors.is_a?(Array) && colors.size == 4
         puts "Validated!"
-        p colors
         true
       else
         puts "Your guess is in the improper format!"
       end
     end
   end
-
+end
 include Mastermind
 
 Game.new
