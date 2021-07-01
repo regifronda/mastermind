@@ -34,6 +34,7 @@ module Mastermind
       result
     end
   end
+
   
   class ComputerPlayer
     attr_accessor :computer_secret_code
