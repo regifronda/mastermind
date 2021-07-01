@@ -14,6 +14,10 @@ module Mastermind
     def beginning_prompt
       puts "Codemaker creates a four-color code from the six colors: \nred, green, blue, yellow, cyan, and purple."
       puts "The colors will be shortened to \'r,\' \'g,\' \'b,\' \'y,\' \'c,\' \'p,\' respectively."
+      puts "Press 1 to be a codebreaker or 2 to be a codemaker."
+      while gets.chomp != "1" do
+        puts "Enter '1' to be a codebreaker or '2' to be a codemaker."
+      end
     end
 
     def codebreaker_mode
@@ -35,6 +39,8 @@ module Mastermind
     end
 
     def get_codebreaker_feedback(secret_code, guess)
+      puts "Each black means you have a correct color in its correct place."
+      puts "Each white means you have a correct color in its incorrect place."
       black = secret_code.zip(guess).count{|i| i.inject(:eql?)}
       white = guess.uniq.count{|i| secret_code.include?(i)}
       result = Array.new(4, '')
