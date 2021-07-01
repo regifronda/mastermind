@@ -22,13 +22,15 @@ module Mastermind
       guess = @human_player.get_human_guess
       p secret_code
       p guess
-      #get_feedback(secret_code, guess)
+      get_feedback(secret_code, guess)
     end
 
     def get_feedback(secret_code, guess)
       result = Array.new(4, '')
       secret_code.zip(guess).each{|i| result.unshift('black').pop if i.inject(:eql?)}
       guess.uniq.each{|i| result.unshift('white').pop if secret_code.include?(i) && result[-1] == ''}
+      print result
+      puts
       result
     end
   end
