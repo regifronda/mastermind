@@ -20,8 +20,9 @@ module Mastermind
       puts "You're the codebreaker!"
       secret_code = @computer_player.get_computer_secret_code
       p secret_code
+      attempt_number = 1
+      puts "Attempt number: #{attempt_number}"
       loop do
-        attempt_number = 1
         guess = @human_player.get_human_guess
         p secret_code
         p guess
@@ -42,12 +43,18 @@ module Mastermind
     end
 
     def check_codebreaker_win(feedback)
-      puts "entered check_codebreaker_win!"
       if feedback == ["black", "black", "black", "black"]
         puts "Congratulations! You win!"
         true
       else
         false
+      end
+    end
+
+    def check_codebreaker_lose(feedback, attempt_number)
+      puts "entered check_codebreaker_lose!"
+      if feedback != ["black", "black", "black", "black"]
+        puts
       end
     end
   end
