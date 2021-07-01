@@ -18,7 +18,7 @@ module Mastermind
     def codebreaker_mode
       puts "You're the codebreaker!"
       secret_code = @computer_player.get_computer_secret_code
-     
+      end
     end
   end
 
@@ -35,6 +35,9 @@ module Mastermind
   end
 end
 
+  class HumanPlayer
+  end
+  
 include Mastermind
 
 Game.new
