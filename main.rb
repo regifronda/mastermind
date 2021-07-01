@@ -62,7 +62,6 @@ module Mastermind
     end
 
     def check_codebreaker_lose(feedback, attempt_number) 
-      puts "entered check_codebreaker_lose!"
       if (feedback != ["black", "black", "black", "black"]) && (attempt_number == 12)
         puts "Sorry, you lose!"
         true
@@ -102,7 +101,7 @@ module Mastermind
     def get_human_guess
       colors = ask_for_human_guess
       if validate_human_guess(colors)
-        puts "statement on validate_human_guess"
+        puts "Input validated!"
       end
       colors
     end
@@ -114,7 +113,6 @@ module Mastermind
 
     def validate_human_guess(colors)
       if colors.is_a?(Array) && colors.size == 4
-        puts "Validated!"
         true
       else
         puts "Your guess is in the improper format!"
@@ -123,11 +121,23 @@ module Mastermind
 
     def get_human_secret_code
       colors = ask_for_human_secret_code
+      if validate_human_secret_code(colors)
+        puts "Input validated"
+      end
+      colors
     end
 
     def ask_for_human_secret_code
       puts "Enter your secret code in the following format: rybb"
       gets.strip.downcase.split(//)
+    end
+
+    def validate_human_secret_code(colors)
+      if colors.is_a?(Array) && colors.size == 4
+        true
+      else
+        puts "Your secret code is in the improper format!"
+      end
     end
   end
 
