@@ -118,8 +118,6 @@ module Mastermind
       end
     end
   
- 
-
   class ComputerPlayer
     attr_accessor :computer_secret_code, :computer_guess
 
