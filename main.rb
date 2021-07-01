@@ -53,13 +53,16 @@ module Mastermind
 
     def ask_for_human_guess
       puts "Enter your guess in the following format: rybb"
-      gets.strip.split(//)
+      gets.strip.downcase.split(//)
     end
 
     def validate_human_guess(colors)
       if colors.is_a?(Array) && colors.size == 4
         puts "Validated!"
+        p colors
         true
+      else
+        puts "Your guess is in the improper format!"
       end
     end
   end
