@@ -19,6 +19,7 @@ module Mastermind
     def codebreaker_mode
       puts "You're the codebreaker!"
       secret_code = @computer_player.get_computer_secret_code
+      guess = @human_player.ask_for_human_guess
       end
     end
   end
@@ -40,6 +41,10 @@ module Mastermind
 
     def initialize(human_guess)
       @human_guess = human_guess
+    end
+
+    def ask_for_human_guess
+      puts "Enter your guess in the following format: rybb"
     end
   end
 
