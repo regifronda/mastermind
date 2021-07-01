@@ -26,16 +26,16 @@ module Mastermind
     end
 
     def get_feedback(secret_code, guess)
+      black = secret_code.zip(guess).count{|i| i.inject(:eql?)}
+      white = guess.uniq.count{|i| secret_code.include?(i)}
       result = Array.new(4, '')
-      secret_code.zip(guess).each{|i| result.unshift('black').pop if i.inject(:eql?)}
-      guess.uniq.each{|i| result.unshift('white').pop if secret_code.include?(i) && result[-1] == ''}
-      print result
-      puts
+      black.times { result.unshift('black').pop }
+      white.times { result.unshift('white').pop }
+      p result
       result
     end
   end
 
-  
   class ComputerPlayer
     attr_accessor :computer_secret_code
 
@@ -78,6 +78,7 @@ module Mastermind
     end
   end
 end
+
 include Mastermind
 
 Game.new
