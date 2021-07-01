@@ -3,21 +3,23 @@ module Mastermind
 
   class Game
     def initialize
-      beginning_prompt
-
       @computer_player = ComputerPlayer.new([])
       @human_player = HumanPlayer.new([])
 
-      codebreaker_mode
+      mode_choice = beginning_prompt
+      
+      if mode_choice == "1"
+        codebreaker_mode
+      elsif mode_choice == "2"
+        codemaker_mode
+      end
     end
 
     def beginning_prompt
       puts "Codemaker creates a four-color code from the six colors: \nred, green, blue, yellow, cyan, and purple."
       puts "The colors will be shortened to \'r,\' \'g,\' \'b,\' \'y,\' \'c,\' \'p,\' respectively."
       puts "Press 1 to be a codebreaker or 2 to be a codemaker."
-      while gets.chomp != "1" do
-        puts "Enter '1' to be a codebreaker or '2' to be a codemaker."
-      end
+      mode_choice = gets.chomp
     end
 
     def codebreaker_mode
@@ -67,6 +69,10 @@ module Mastermind
       else
         false
       end
+    end
+
+    def codemaker_mode
+      puts "codemaker_mode entered!"
     end
   end
  
