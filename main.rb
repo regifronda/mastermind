@@ -6,6 +6,7 @@ module Mastermind
       beginning_prompt
 
       @computer_player = ComputerPlayer.new([])
+      @human_player = HumanPlayer.new([])
 
       codebreaker_mode
     end
@@ -33,11 +34,15 @@ module Mastermind
       @computer_secret_code = 4.times.map { |color| COLOR_CHOICES.sample }
     end
   end
-end
 
   class HumanPlayer
+    attr_accessor :human_guess
+
+    def initialize(human_guess)
+      @human_guess = human_guess
+    end
   end
-  
+
 include Mastermind
 
 Game.new
