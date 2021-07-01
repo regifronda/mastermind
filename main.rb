@@ -19,7 +19,7 @@ module Mastermind
     def codebreaker_mode
       puts "You're the codebreaker!"
       secret_code = @computer_player.get_computer_secret_code
-      guess = @human_player.ask_for_human_guess
+      guess = @human_player.get_human_guess
       end
     end
   end
@@ -42,9 +42,25 @@ module Mastermind
     def initialize(human_guess)
       @human_guess = human_guess
     end
+  
+    def get_human_guess
+      colors = ask_for_human_guess
+      
+      if validate_human_guess(colors)
+        puts "if statement on validate_human_guess"
+      end
+    end
 
     def ask_for_human_guess
       puts "Enter your guess in the following format: rybb"
+      gets.strip.split(//)
+    end
+
+    def validate_human_guess(colors)
+      if colors.is_a?(Array) && colors.size == 4
+        puts "Validated!"
+        true
+      end
     end
   end
 
