@@ -26,8 +26,10 @@ module Mastermind
         guess = @human_player.get_human_guess
         p secret_code
         p guess
+        puts "Attempt number: #{attempt_number}"
         feedback = get_codebreaker_feedback(secret_code, guess)
-        break if check_codebreaker_win(feedback)
+        break if check_codebreaker_win(feedback) || check_codebreaker_lose(feedback, attempt_number)
+        attempt_number += 1
         end
       end
     end
@@ -51,10 +53,13 @@ module Mastermind
       end
     end
 
-    def check_codebreaker_lose(feedback, attempt_number)
+    def check_codebreaker_lose(feedback, attempt_number) 
       puts "entered check_codebreaker_lose!"
-      if feedback != ["black", "black", "black", "black"]
-        puts
+      if (feedback != ["black", "black", "black", "black"]) && (attempt_number == 12)
+        puts "Sorry, you lose!"
+        true
+      else
+        false
       end
     end
   end
@@ -101,7 +106,6 @@ module Mastermind
       end
     end
   end
-
 
 include Mastermind
 
