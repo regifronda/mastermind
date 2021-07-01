@@ -19,15 +19,17 @@ module Mastermind
     def codebreaker_mode
       puts "You're the codebreaker!"
       secret_code = @computer_player.get_computer_secret_code
+      p secret_code
       loop do
+        attempt_number = 1
         guess = @human_player.get_human_guess
         p secret_code
         p guess
         feedback = get_codebreaker_feedback(secret_code, guess)
-        #check_codebreaker_win(feedback)
+        break if check_codebreaker_win(feedback)
+        end
       end
     end
-
 
     def get_codebreaker_feedback(secret_code, guess)
       black = secret_code.zip(guess).count{|i| i.inject(:eql?)}
@@ -49,7 +51,7 @@ module Mastermind
       end
     end
   end
-
+ 
 
   class ComputerPlayer
     attr_accessor :computer_secret_code
@@ -92,7 +94,7 @@ module Mastermind
       end
     end
   end
-end
+
 
 include Mastermind
 
