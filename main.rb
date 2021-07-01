@@ -73,8 +73,51 @@ module Mastermind
     def codemaker_mode
       puts "You're the codemaker!"
       secret_code = @human_player.get_human_secret_code
+      p secret_code
+      attempt_number = 1
+      puts "Attempt number: #{attempt_number}"
+      loop do
+        guess = @computer_player.get_computer_player_guess
+        p secret_code
+        p guess
+        puts "Attempt number: #{attempt_number}"
+        feedback = get_codemaker_feedback(secret_code, guess)
+        break if check_codemaker_win(feedback, attempt_number) || check_codemaker_lose(feedback)
+          attempt_number += 1
+        end
+      end
     end
-  end
+
+    def get_codemaker_feedback(secret_code, guess)
+      puts "Each black means you have a correct color in its correct place."
+      puts "Each white means you have a correct color in its incorrect place."
+      black = secret_code.zip(guess).count{|i| i.inject(:eql?)}
+      white = guess.uniq.count{|i| secret_code.include?(i)}
+      result = Array.new(4, '')
+      white.times { result.unshift('white').pop }
+      black.times { result.unshift('black').pop }
+      p result
+      result
+    end
+
+    def check_codemaker_lose(feedback)
+      if feedback == ["black", "black", "black", "black"]
+        puts "Too bad! You lose."
+        true
+      else
+        false
+      end
+    end
+
+    def check_codemaker_win(feedback, attempt_number) 
+      if (feedback != ["black", "black", "black", "black"]) && (attempt_number == 12)
+        puts "Congratulations! You win!"
+        true
+      else
+        false
+      end
+    end
+  
  
 
   class ComputerPlayer
@@ -87,6 +130,10 @@ module Mastermind
 
     def get_computer_secret_code
       @computer_secret_code = 4.times.map { |color| COLOR_CHOICES.sample }
+    end
+
+    def get_computer_player_guess
+      @computer_player_guess = 4.times.map { |color| COLOR_CHOICES.sample }
     end
   end
 
